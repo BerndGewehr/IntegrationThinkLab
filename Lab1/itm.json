@@ -44,7 +44,7 @@
                         "enabled": true,
                         "script": {
                             "source": "https://apps.ce.collabserv.com/files/customizer/orientMe_scripts.js",
-                            "function": "__createOppy"
+                            "function": "__createOppy_stub"
                         },
                         "icon": {
                             "type": "png",
@@ -62,7 +62,7 @@
                         "enabled": true,
                         "script": {
                             "source": "https://apps.ce.collabserv.com/files/customizer/orientMe_scripts.js",
-                            "function": "__showOppy"
+                            "function": "__showOppy_stub"
                         }
                     }
                 ],
