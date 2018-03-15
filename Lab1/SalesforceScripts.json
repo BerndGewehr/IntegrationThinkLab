@@ -1,0 +1,24 @@
+{
+    "name": "SalesforceScripts",
+    "title": "SalesForce scripts",
+    "description": "SalesForce scripts",
+    "services": [
+        "Customizer"
+    ],
+    "extensions": [
+        {
+            "name": "CSS Stylesheet",
+            "type": "com.ibm.customizer.ui",
+            "payload": {
+                "include-files": [
+                    "salesforce/svc_styles/mySalesforce.css"
+                ],
+                "include-repo": {
+                    "name": "think-samples"
+                }
+            },
+            "path": "social",
+            "application": "SalesforceScripts"
+        }
+    ]
+}

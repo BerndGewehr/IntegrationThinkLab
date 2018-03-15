@@ -1,0 +1,10 @@
+{
+    "text": "SFDC",
+    "description": "Salesforce Demo",
+    "icon": "https://apps.na.collabserv.com/files/customizer/salesforce/salesforce.png?repoName=think-samples",
+    "url": "https://apps.na.collabserv.com/files/customizer/salesforce/salesforce.html?repoName=think-samples",
+    "extends": "as_event",
+    "type": "gadget",
+    "mime_type": "",
+    "enabled": "true"
+  }
