@@ -2,7 +2,7 @@
 
 IBM Connections Integration Labs for Think2018
 
-## Lab2 : Creating a new OrientMe "bubble"
+## Lab3 : Create a Saleforce Oppy from IBM Connections
 
-![newTab](../Docs/images/Lab2-image01.png)
+![newTab](../Docs/images/Lab3-image01.png)
 
