@@ -24,7 +24,7 @@ function _getSFDCAccounts() {
         true);
     xmlHttpReq.setRequestHeader('accept', 'application/json');
     //xmlHttpReq.setRequestHeader('Content-Type', 'application/json');
-    xmlHttpReq.setRequestHeader('x-ibm-client-id', '954ca1f5-b101-402e-877b-82e3a6ab264f');
+    xmlHttpReq.setRequestHeader('x-ibm-client-id', 'xxxxxxx');
     xmlHttpReq.onreadystatechange = function () {
         if (xmlHttpReq.readyState == 4) {
             if ((xmlHttpReq.status == 200)) {
@@ -49,7 +49,7 @@ function _sendCreateOppy(finalURL, data) {
     xmlHttpReq.open('POST', finalURL, true);
     xmlHttpReq.setRequestHeader('accept', 'application/json');
     xmlHttpReq.setRequestHeader('Content-Type', 'application/json');
-    xmlHttpReq.setRequestHeader('x-ibm-client-id', '7357e331-fd9b-4e10-adf0-5ceccca35cbc');
+    xmlHttpReq.setRequestHeader('x-ibm-client-id', 'xxxxxxx');
     xmlHttpReq.onreadystatechange = function() {
         if (xmlHttpReq.readyState == 4) {
             if ((xmlHttpReq.status == 200)) {

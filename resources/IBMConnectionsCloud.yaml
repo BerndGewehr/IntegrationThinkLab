@@ -1,0 +1,417 @@
+swagger: '2.0'
+info:
+  version: 'v1'
+  title: 'IBM Connections Cloud APIs'
+  description: 'topolino'
+schemes:
+  - 'https'
+consumes:
+  - 'application/json'
+produces:
+  - 'application/json'
+basePath: '/gws/apigateway/api/78ee16a6b2e0832faf42a8464fc5a4facb91e87a33f3acddd5d9c74fc4a448c0/cnx2'
+host: 'service.us.apiconnect.ibmcloud.com'
+paths:
+  /getProfile:
+    get:
+      operationId: 'getProfile'
+      summary: 'Rerieves a Profile by mail or userId'
+      description: 'Defaults to the user under whose authority the APIs are invoked'
+      parameters:
+      - in: 'query'
+        name: "userid"
+        description: "userId or email address of the user whose profile needs to be retrieved"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A successful invocation response"
+          schema:
+            $ref: "#/definitions/UserProfile"
+  /getMyProfile:
+    get:
+      operationId: 'getMyProfile'
+      summary: 'Rerieves My Profile'
+      description: 'Defaults to the user under whose authority the APIs are invoked'
+      parameters: []
+      responses:
+        200:
+          description: "A successful invocation response"
+          schema:
+            $ref: '#/definitions/UserProfile'
+  /getProfileSvc:
+    get:
+      operationId: 'getProfileSvc'
+      summary: 'Rerieves the Profile Service Document'
+      description: 'Defaults to the user under whose authority the APIs are invoked'
+      parameters: []
+      responses:
+        200:
+          description: "A successful invocation response"
+          schema:
+            $ref: '#/definitions/ProfileSvcDoc'
+  /buildSF_EE:
+    post:
+      operationId: 'buildSF_EE'
+      summary: 'builds the Embedded Experience for Salesforce'
+      description: 'builds the Embedded Experience for Salesforce'
+      parameters:
+      - in: 'body'
+        name: "opportunity"
+        description: "Opportunity information coming from Salesforce Retrieve Opportunity API"
+        required: false
+        schema:
+          type: "object"
+      - in: 'query'
+        name: "accountName"
+        description: "Salesforce Account Name"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A successful invocation response"
+          schema:
+            type: "object"
+  /getAS:
+    get:
+      operationId: 'getAS'
+      summary: 'Retrieves the ActivityStream for a user of a Community'
+      description: 'Defaults to the user under whose authority the APIs are invoked'
+      parameters:
+      - in: 'query'
+        name: "userid"
+        description: "userId or email address of the user whose ActivityStream needs to be retrieved. If missing and communityId also missing, then defaults to current user"
+        required: false
+        type: "string"
+      - in: 'query'
+        name: "communityId"
+        description: "the IBM Connections ID of the community whose ActivityStream needs to be retrieved. If missing and userid also missing, then defaults to current user"
+        required: false
+        type: "string"
+      - in: 'query'
+        name: "target"
+        description: "Values can be 'myboard', 'person' or 'community' . Defaults to myboard. If 'person' then 'userid' needs to be specified. If 'community' then 'communityId' needs to be specified"
+        required: false
+        type: "string"
+      - in: 'query'
+        name: "module"
+        description: "filters the results. Values can be 'all', 'status', 'activities', 'files', 'blogs', 'forums', 'bookmarks' or 'wikis' . Defaults to 'all'"
+        required: false
+        type: "string"
+      - in: 'query'
+        name: "sinceDate"
+        description: "if present, defines the eldest date from which to retrieve the events. Format is dd/mm/yyyy"
+        required: false
+        type: "string"
+        format: "date"
+      - in: 'query'
+        name: "untilDate"
+        description: "if present, defines the most recent date from which to retrieve the events. Format is dd/mm/yyyy"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A successful invocation response"
+          schema:
+            $ref: '#/definitions/ActivityStreamList'
+  /postAS:
+    post:
+      operationId: 'postAS'
+      summary: 'Sends an event to the ActivityStream for a user of a Community'
+      description: 'Defaults to the user under whose authority the APIs are invoked'
+      parameters:
+      - in: 'query'
+        name: "userid"
+        description: "userId or email address of the user whose ActivityStream needs to be retrieved. If missing and communityId also missing, then defaults to current user"
+        required: false
+        type: "string"
+      - in: 'query'
+        name: "communityId"
+        description: "the IBM Connections ID of the community whose ActivityStream needs to be retrieved. If missing and userid also missing, then defaults to current user"
+        required: false
+        type: "string"
+      - in: 'query'
+        name: "target"
+        description: "Values can be 'myboard' 'person' 'community' . Defaults to myboard. If 'person' then 'userid' needs to be specified. If 'community' then 'communityId' needs to be specified"
+        required: false
+        type: "string"
+      - in: 'query'
+        name: "status_update"
+        description: "if present, defines the text that is sent as a 'status update' to the target and takes precedence on 'embeddedExp'"
+        required: false
+        type: "string"
+      - in: 'query'
+        name: "commentId"
+        description: "In case 'status_update' is present, the 'status_update' text is considered to be a comment to the story whose ID is specified by this parameter"
+        required: false
+        type: "string"
+      - in: 'body'
+        name: "embeddedExp"
+        required: false
+        schema:
+          type: "object"
+          properties:
+            embeddedExp:
+              type: "object"
+              description: "the JSON representation of the embedded experience to be sent. No Check is performed on the syntax."
+      responses:
+        200:
+          description: "A successful invocation response"
+          schema:
+            $ref: '#/definitions/ActivityStreamItem'
+definitions:
+  ProfileSvcDoc:
+    type: "object"
+    properties:
+      displayName:
+        type: "string"
+      userId:
+        type: "string"
+  UserProfile:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      photo:
+        type: "string"
+      userid:
+        type: "string"
+      key:
+        type: "string"
+      mail:
+        type: "string"
+      title:
+        type: "string"
+      vcard:
+        type: "string"
+  ActivityStreamItem:
+    type: object
+    properties:
+      entry:
+        $ref: "#/definitions/ActivityStreamEntry"
+      status_ur:
+        type: string
+  ActivityStreamPerson:
+    type: object
+    properties:
+      id:
+        type: string
+      displayName:
+        type: string
+      connections:
+        type: object
+        properties:
+          isExternal:
+            type: string
+          state:
+            type: string
+      objectType:
+        type: string
+  ActivityStreamGenerator:
+    type: object
+    properties:
+      image:
+        $ref: "#/definitions/ActivityStreamImage"
+      id:
+        type: string
+      displayName:
+        type: string
+      url:
+        type: string
+  ActivityStreamCounter:
+    type: object
+    properties:
+      totalItems:
+        type: number
+  ActivityStreamEntry:
+    type: object
+    properties:
+      displayName:
+        type: string
+      author:
+        $ref: '#/definitions/ActivityStreamPerson'
+      url:
+        type: string
+      image:
+        $ref: "#/definitions/ActivityStreamImage"
+      published:
+        type: string
+        format: datetime
+      mimeType:
+        type: string
+      likes:
+        $ref: "#/definitions/ActivityStreamCounter"
+      id:
+        type: string
+      updated:
+        type: string
+        format: datetime
+      fileUrl:
+        type: string
+      objectType:
+        type: string
+      replies:
+        $ref: "#/definitions/ActivityStreamCounter"
+      summary:
+        type: string
+      connections:
+        type: object
+        properties:
+          isExternal:
+            type: string
+  ActivityStreamEmbed:
+    type: object
+    properties:
+      embed:
+        type: object
+        properties:
+          gadget:
+            type: string
+          context:
+            type: object
+            properties:
+              eventTitle:
+                type: string
+              actor:
+                $ref: "#/definitions/ActivityStreamPerson"
+              eventType:
+                type: string
+              openSocial:
+                type: object
+                properties:
+                  connections:
+                    type: object
+                    properties:
+                      generator:
+                        $ref: "#/definitions/ActivityStreamGenerator"
+                      rollupUrl:
+                        type: string
+              numLikes:
+                type: string
+              tags:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    displayName:
+                      type: string
+                    objectType:
+                      type: string
+              containerid:
+                type: string
+              published:
+                type: string
+                format: datetime
+              itemUrl:
+                type: string
+              eventId:
+                type: string
+              isPublic:
+                type: string
+              connectionsContentUrl:
+                type: string
+              id:
+                type: string
+              updated:
+                type: string
+                format: datetime
+              numComments:
+                type: string
+              rollupUrl:
+                type: string
+              title:
+                type: string
+              summary:
+                type: string
+              iconUrl:
+                type: string
+  ActivityStreamImage:
+    type: object
+    properties:
+      url:
+        type: string
+  ActivityStreamList:
+    type: object
+    properties:
+      payload:
+        type: array
+        items:
+          properties:
+            actor:
+              $ref: '#/definitions/ActivityStreamPerson'
+            generator:
+              $ref: "#/definitions/ActivityStreamGenerator"
+            provider:
+              type: object
+              properties:
+                id:
+                  type: string
+                displayName:
+                  type: string
+                url:
+                  type: string
+            url:
+              type: string
+            published:
+              type: string
+              format: datetime
+            icon:
+              type: object
+              properties:
+                url:
+                  type: string
+            object:
+              $ref: '#/definitions/ActivityStreamEntry'
+            openSocial:
+              $ref: "#/definitions/ActivityStreamEmbed"
+            id:
+              type: string
+            updated:
+              type: string
+              format: datetime
+            verb:
+              type: string
+            title:
+              type: string
+            connections:
+              type: object
+              properties:
+                read:
+                  type: string
+                plainTitle:
+                  type: string
+                shortTitle:
+                  type: string
+                containerName:
+                  type: string
+                atomUrl:
+                  type: string
+                isPublic:
+                  type: string
+                saved:
+                  type: string
+                broadcast:
+                  type: string
+                rollupid:
+                  type: string
+                isTypeAHeadEnabled:
+                  type: string
+                rollupUrl:
+                  type: string
+                organizationId:
+                  type: string
+                containerId:
+                  type: string
+                followedResource:
+                  type: string
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
+securityDefinitions:
+  basicAuth:
+    type: basic
+    description: HTTP Basic Authentication. Works over `HTTP` and `HTTPS`
+security:
+  - basicAuth: []
+        
